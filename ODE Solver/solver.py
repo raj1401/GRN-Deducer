@@ -110,9 +110,16 @@ with open("to_gen_mono.json",'r') as file:
     solve_for = json.load(file)
 file.close()
 
-with open("to_gen_mono_old.json",'r') as file:
-    already_solved = json.load(file)
-file.close()
+pth = os.path.join(os.path.dirname(__file__),"Data for monostable parameters")
+dir_list = os.listdir(pth)
+for fl in dir_list:
+    n = ""
+    if fl[0] == 't':
+        for i in fl:
+            if i.isnumeric() and int(i) in list(range(10)):
+                n += i
+        already_solved.append(int(n))
+
 
 # # Bistable
 # stability = 'bistable'
@@ -121,21 +128,18 @@ file.close()
 #     solve_for = json.load(file)
 # file.close()
 
-# with open("to_gen_bi_old.json",'r') as file:
-#     already_solved = json.load(file)
-# file.close()
+# pth = os.path.join(os.path.dirname(__file__),"Data for bistable parameters")
+# dir_list = os.listdir(pth)
+# for fl in dir_list:
+#     n = ""
+#     if fl[0] == 'd':
+#         for i in fl:
+#             if i.isnumeric() and int(i) in list(range(10)):
+#                 n += i
+#         already_solved.append(int(n))
 
 
 for prm in solve_for:
-    if not (prm in already_solved):
+    if  (prm not in already_solved):
         solve(prm,'degradation','training_data',stability,plot=True)
         already_solved.append(prm)
-
-if stability == 'monostable':
-    with open("to_gen_mono_old.json",'r') as file:
-        json.dump(already_solved,file,indent=2)
-    file.close()
-else:
-    with open("to_gen_bi_old.json",'r') as file:
-        json.dump(already_solved,file,indent=2)
-    file.close()

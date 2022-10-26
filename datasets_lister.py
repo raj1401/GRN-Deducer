@@ -39,9 +39,9 @@ j=0
 while i < (data_array.shape[0]):
     if data_array[i,1] == 1:
         # (A_ss/(g_A/k_A)) / (B_ss/(g_B/k_B))
-        # mono.append([data_array[i,0],(((2**data_array[i,3])/(param_array[j,2]/param_array[j,2+total_genes]))/((2**data_array[i,4])/(param_array[j,3]/param_array[j,3+total_genes])))])
+        mono.append([data_array[i,0],(((2**data_array[i,3])/(param_array[j,2]/param_array[j,2+total_genes]))/((2**data_array[i,4])/(param_array[j,3]/param_array[j,3+total_genes])))])
         # A_ss/B_ss
-        mono.append([data_array[i,0],(((2**data_array[i,3]))/((2**data_array[i,4])))])
+        # mono.append([data_array[i,0],(((2**data_array[i,3]))/((2**data_array[i,4])))])
     elif data_array[i,1] == 2:
         if data_array[i,3] > data_array[i,4]:
             bi.append([data_array[i,0],(data_array[i,2]/data_array[i+1,2])])

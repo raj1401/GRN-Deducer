@@ -26,7 +26,7 @@ for f in file_names_mono:
                     param += i
         param_int = int(param)
         for g in range(num_genes):
-            new_dat[:,g] = 1 - 1/np.max(data[:,g]) * data[:,g]
+            new_dat[:,g] = 1/np.max(data[:,g]) * data[:,g]
         
         if new_dat.shape[0] > 3000:
             new_dat_len = new_dat.shape[0]
@@ -52,7 +52,7 @@ for f in file_names_bi:
                     param += i
         param_int = int(param)
         for g in range(num_genes):
-            new_dat[:,g] = 1 - 1/np.max(data[:,g]) * data[:,g]
+            new_dat[:,g] = 1/np.max(data[:,g]) * data[:,g]
         
         if new_dat.shape[0] > 3000:
             new_dat_len = new_dat.shape[0]

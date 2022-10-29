@@ -84,6 +84,9 @@ def train_network(x_train,gamma,f_vec,time_steps,total_genes,genes_to_train,batc
         plt.show()
 
     inter_matrix = acc_f.deduce_interactions(check_data,NN_models,genes_to_train,act_fn=act_fn,plot=plot_f_vals)
+
+    # Clearing the model to avoid clutter
+    tf.keras.backend.clear_session()
     
     return inter_matrix, error
 

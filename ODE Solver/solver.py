@@ -132,7 +132,7 @@ for fl in dir_list:
 # dir_list = os.listdir(pth)
 # for fl in dir_list:
 #     n = ""
-#     if fl[0] == 'd':
+#     if fl[0] == 't':
 #         for i in fl:
 #             if i.isnumeric() and int(i) in list(range(10)):
 #                 n += i

@@ -88,7 +88,7 @@ while i<new_mono.shape[0]:
     i+=1  # Keep i = 26 to select 30 equally spaced monostable sets
 
 i=0
-train_bi, train_bi_sing_norm, train_bi_mult_norm, deg_bi = [], [], [], []
+train_bi, train_bi_sing_norm, train_bi_mult_norm, train_bi_mult_check, deg_bi = [], [], [], [], []
 while i<new_bi.shape[0]:
     p = int(new_bi[i,0])
     to_train_bi.append(p)
@@ -96,10 +96,12 @@ while i<new_bi.shape[0]:
     path2 = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters Singular Normalized",f"training_data_sing_norm_{p}.txt")
     path3 = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters Multiple Normalized",f"training_data_mult_norm_{p}.txt")
     path4 = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters",f"degradation_{p}.txt")
+    path5 = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters Normalized Checker",f"training_data_opp_{p}.txt")
     train_bi.append(path1)
     train_bi_sing_norm.append(path2)
     train_bi_mult_norm.append(path3)
     deg_bi.append(path4)
+    train_bi_mult_check.append(path5)
     i+=1  # Keep i = 7 to select 32 equally spaced bistable sets
 
 
@@ -138,6 +140,9 @@ with open("train_list_bi_sing.json",'w') as f:
 f.close()
 with open("train_list_bi_mult.json",'w') as f:
     json.dump(train_bi_mult_norm,f,indent=2)
+f.close()
+with open("train_list_bi_opp_mult.json",'w') as f:
+    json.dump(train_bi_mult_check,f,indent=2)
 f.close()
 with open("deg_list_bi.json",'w') as f:
     json.dump(deg_bi,f,indent=2)

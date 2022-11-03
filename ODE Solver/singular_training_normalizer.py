@@ -20,6 +20,13 @@ new_dir_2 = 'Data for bistable parameters Singular Normalized'
 if not os.path.exists(new_dir_2):
     os.makedirs(new_dir_2)
 
+# For normalizing opposite bistable data
+file_names_bi = os.listdir('Data for bistable parameters Checker')
+new_dir_2 = 'Data for bistable parameters Singular Normalized Checker'
+if not os.path.exists(new_dir_2):
+    os.makedirs(new_dir_2)
+
+
 for f in file_names_mono:
     if f[0] == 't':
         p = os.path.join(os.path.dirname(__file__),"Data for monostable parameters",f"{f}")
@@ -51,6 +58,10 @@ for f in file_names_mono:
 for f in file_names_bi:
     if f[0] == 't':
         p = os.path.join(os.path.dirname(__file__),"Data for bistable parameters",f"{f}")
+
+        # For normalizing opposite bistable data
+        p = os.path.join(os.path.dirname(__file__),"Data for bistable parameters Checker",f"{f}")
+
         data = np.loadtxt(p)
         new_dat = np.empty(shape=data.shape)
         new_dat_list = []
@@ -72,5 +83,10 @@ for f in file_names_bi:
                     new_dat_list.append(list(new_dat[i,:]))
             new_dat = np.array(new_dat_list)
 
-        p = os.path.join(os.path.dirname(__file__),"Data for bistable parameters Singular Normalized",f"training_data_sing_norm_{param_int}.txt")
+        f_name = "training_data_sing_norm"
+
+        # For normalizing opposite bistable data
+        f_name = "training_data_opp"
+
+        p = os.path.join(os.path.dirname(__file__),new_dir_2,f_name,f"_{param_int}.txt")
         np.savetxt(p,new_dat)

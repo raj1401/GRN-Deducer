@@ -1,5 +1,5 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import tensorflow as tf
 from tensorflow import keras
@@ -29,6 +29,9 @@ class SelfActivityRestrictor(tf.keras.constraints.Constraint):
 
 
 def train_network(x_train,gamma,f_vec,time_steps,total_genes,genes_to_train,batch_size,epochs,plot_gen_data,plot_f_vals,act_fn,check_data):
+    # Clearing the model to avoid clutter
+    tf.keras.backend.clear_session()
+    
     #genes_to_train = total_genes    # Genes for which NNs must be generated
     
     # List of all NN models
@@ -84,9 +87,6 @@ def train_network(x_train,gamma,f_vec,time_steps,total_genes,genes_to_train,batc
         plt.show()
 
     inter_matrix = acc_f.deduce_interactions(check_data,NN_models,genes_to_train,act_fn=act_fn,plot=plot_f_vals)
-
-    # Clearing the model to avoid clutter
-    tf.keras.backend.clear_session()
     
     return inter_matrix, error
 

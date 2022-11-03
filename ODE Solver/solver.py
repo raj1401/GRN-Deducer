@@ -54,6 +54,10 @@ def solve(parameter_set_num,deg_name,train_data_name,stability,plot=False):
 
     # Creating the new folder for storing the training data and degradation values
     new_dir = f'Data for {stability} parameters'
+
+    # For generating opposite bistable data
+    new_dir = f'Data for {stability} parameters Checker'
+
     if not os.path.exists(new_dir):
         os.makedirs(new_dir)
 
@@ -103,32 +107,17 @@ def solve(parameter_set_num,deg_name,train_data_name,stability,plot=False):
     return None
 
 
-# Monostable
-stability = 'monostable'
-solve_for, already_solved = [], []
-with open("to_gen_mono.json",'r') as file:
-    solve_for = json.load(file)
-file.close()
-
-pth = os.path.join(os.path.dirname(__file__),"Data for monostable parameters")
-dir_list = os.listdir(pth)
-for fl in dir_list:
-    n = ""
-    if fl[0] == 't':
-        for i in fl:
-            if i.isnumeric() and int(i) in list(range(10)):
-                n += i
-        already_solved.append(int(n))
-
-
-# # Bistable
-# stability = 'bistable'
+# # Monostable
+# stability = 'monostable'
 # solve_for, already_solved = [], []
-# with open("to_gen_bi.json",'r') as file:
+# with open("to_gen_mono.json",'r') as file:
 #     solve_for = json.load(file)
 # file.close()
 
-# pth = os.path.join(os.path.dirname(__file__),"Data for bistable parameters")
+# pth = os.path.join(os.path.dirname(__file__),"Data for monostable parameters")
+# if not os.path.exists(pth):
+#         os.makedirs(pth)
+
 # dir_list = os.listdir(pth)
 # for fl in dir_list:
 #     n = ""
@@ -139,7 +128,32 @@ for fl in dir_list:
 #         already_solved.append(int(n))
 
 
+# Bistable
+stability = 'bistable'
+solve_for, already_solved = [], []
+with open("to_gen_bi.json",'r') as file:
+    solve_for = json.load(file)
+file.close()
+
+pth = os.path.join(os.path.dirname(__file__),"Data for bistable parameters")
+
+# For generating opposite bistable data
+pth = os.path.join(os.path.dirname(__file__),"Data for bistable parameters Checker")
+
+if not os.path.exists(pth):
+        os.makedirs(pth)
+
+dir_list = os.listdir(pth)
+for fl in dir_list:
+    n = ""
+    if fl[0] == 't':
+        for i in fl:
+            if i.isnumeric() and int(i) in list(range(10)):
+                n += i
+        already_solved.append(int(n))
+
+
 for prm in solve_for:
     if  (prm not in already_solved):
-        solve(prm,'degradation','training_data',stability,plot=True)
+        solve(prm,'degradation','training_data_opp',stability,plot=True)
         already_solved.append(prm)

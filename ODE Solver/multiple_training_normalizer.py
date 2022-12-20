@@ -76,5 +76,5 @@ for f in file_names_bi:
         # For normalizing opposite bistable data
         f_name = "training_data_opp"
 
-        p = os.path.join(os.path.dirname(__file__),new_dir_2,f_name,f"_{param_int}.txt")
+        p = os.path.join(os.path.dirname(__file__),new_dir_2,f_name+f"_{param_int}.txt")
         np.savetxt(p,new_dat)

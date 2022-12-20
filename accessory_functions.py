@@ -22,6 +22,9 @@ def generate_data(initial_val,genes_to_train,gamma,time_steps,f_gen,x_gen,NN_mod
             f_gen[t,gene] = NN_model(tf.convert_to_tensor(input_val, dtype=tf.float64))
             if t != time_steps - 1:
                 x_gen[t+1,gene] = g_n1(f_gen[t,gene],x_gen[t,gene],gamma[gene])
+    
+    # Clearing the model to avoid clutter
+    tf.keras.backend.clear_session()
     return x_gen, f_gen
 
 

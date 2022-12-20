@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import multiprocessing
 from joblib import Parallel, delayed
-import tqdm
+from tqdm import tqdm
 import training_function as train
 import accessory_functions as acc_f
 import json
@@ -97,5 +97,5 @@ if __name__ == "__main__":
     plt.xlabel("Parameter Number")
     plt.ylabel("Mean Squared Error")
     plt.title("Mean Square Error on Training Various Data Sets")
-    plt.show()
-
+    plt.savefig(os.path.join("Plots","bistability_check.png"))
+    #plt.show()

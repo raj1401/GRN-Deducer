@@ -82,7 +82,7 @@ if __name__ == "__main__":
     f.close()
 
     err_arr = check_bistability(train_data_list,check_data_list,deg_list)
-    pth = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters","Error_Array_Bistability_Check.txt")
+    pth = os.path.join(os.path.dirname(__file__),"ODE Solver","Data for bistable parameters Checker","Error_Array_Bistability_Check.txt")
     np.savetxt(pth,err_arr)
 
     # Plotting
@@ -97,5 +97,7 @@ if __name__ == "__main__":
     plt.xlabel("Parameter Number")
     plt.ylabel("Mean Squared Error")
     plt.title("Mean Square Error on Training Various Data Sets")
-    plt.savefig(os.path.join("Plots","bistability_check.png"))
+    fig = plt.gcf()
+    fig.set_size_inches(19,11)
+    plt.savefig(os.path.join("Plots","bistability_check.png"),dpi=100)
     #plt.show()
